@@ -91,7 +91,7 @@ bool hangman::isComplete() const {
 std::string hangman::printWord() const{
 	std::string print = "";
 	for(size_t i = 0; i < this->wordLength; i++){
-		print += found[i];
+		print += word[i];
 	}
 	return print;
 }
