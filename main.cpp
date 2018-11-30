@@ -18,6 +18,18 @@ int main(){
 		cin >> letter;
 
 		h1.guess(letter);
+		cout << h1.printFound() << endl;
+		cout << "Number of lives left: " << h1.displayLives() << endl;
+
+		cout << "------------------------------------------" << endl;
+	}
+
+	if(h1.displayLives() != 0){
+		cout << "Congratulations! You have correctly guessed the word "; 
+		cout << "\"" << h1.printWord() << "\"!" << endl;
+	}
+	else{
+		cout << "Sorry, you have not guessed the word correctly.";
 	}
 
 	return 0;

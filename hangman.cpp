@@ -39,9 +39,10 @@ void hangman::readWord(const char* const w){
 	wordLength = strlen(w);
 	strcpy(this->word, w);
 
-	// for (size_t i = 0; i < strlen(w); i++) {
-	// 	this->word[i] = w[i];
-	// }
+	//initializes found with '_' characters
+	for(size_t i = 0; i < this->wordLength; i++){
+		this->found[i] = '_';
+	}
 
 	return;
 }
@@ -51,7 +52,7 @@ bool hangman::guess(const char c){
 	//MAKE SURE TO CHECK FOR VALID INPUTS
 	bool foundLetter;
 	int numfound = 0;
-	for(int i = 0; i < strlen(this->word); i++){
+	for(size_t i = 0; i < this->wordLength; i++){
 		if(c == this->word[i]){
 			this->found[i] = c;
 			foundLetter = true;
@@ -79,12 +80,29 @@ int hangman::displayLives() const {
 }
 
 bool hangman::isComplete() const {
-	for(int i = 0; i < strlen(this->word); i++){
+	for(size_t i = 0; i < this->wordLength; i++){
 		if(this->found[i] != this->word[i]){
 			return false;
 		}
 	}
 	return true;
+}
+
+std::string hangman::printWord() const{
+	std::string print = "";
+	for(size_t i = 0; i < this->wordLength; i++){
+		print += found[i];
+	}
+	return print;
+}
+
+std::string hangman::printFound() const{
+	std::string print = "";
+	for(size_t i = 0; i < this->wordLength; i++){
+		print += this->found[i];
+		print += ' ';
+	}
+	return print;
 }
 
 hangman& hangman::operator=(const hangman& h){
