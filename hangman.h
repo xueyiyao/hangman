@@ -19,11 +19,13 @@ public:
 	//reads word into char array 'word'
 	void readWord(const char* const w);
 	//takes user's guess and updates inc or found
-	void guess(const char c);
+	bool guess(const char c);
 	//prints a string of the incorrectly guessed letters so far
 	std::string incSoFar() const;
 	//displays how many "lives" are remaining
 	int displayLives() const;
+	//returns if game has been completed
+	bool isComplete() const;
 
 	//overloaded copy assignment operator
 	hangman& operator=(const hangman& h);
@@ -40,6 +42,8 @@ private:
 	size_t wordLength;
 	//remaning incorrect guessed left
 	int livesLeft;
+	//bool to see if word has been guessed correctly
+	//bool completed;
 };
 
 #endif

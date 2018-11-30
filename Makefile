@@ -1,3 +1,5 @@
+#Makefile
+
 main: main.o hangman.o
 	g++ main.o hangman.o -o main
 
@@ -8,4 +10,4 @@ hangman.o: hangman.cpp hangman.h
 	g++ -c hangman.cpp
 
 clean:
-	rm -f *-o main
+	/bin/rm -f *.o main
