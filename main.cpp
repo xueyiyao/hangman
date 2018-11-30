@@ -22,13 +22,17 @@ int main(){
 		srand(time(0));
 		random = rand() % 2244;
 
-	while(getline(wordFile, line)){
-		++lineNum;
-		if(lineNum == random){
-			h1.readWord(line.c_str());
+	if(wordFile.is_open()){
+		while(getline(wordFile, line)){
+			++lineNum;
+			if(lineNum == random){
+				h1.readWord(line.c_str());
+			}
 		}
+		wordFile.close();
 	}
-	//h1.readWord("testing");
+	
+	cout << h1.printFound() << endl;
 
 	while(h1.displayLives() != 0 && h1.isComplete() == false){
 		char letter;
