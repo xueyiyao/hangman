@@ -105,6 +105,17 @@ std::string hangman::printFound() const{
 	return print;
 }
 
+std::string hangman::printInc() const{
+	std::string print = "";
+	for(size_t i = 0; i < inc.size(); i++){
+		print += inc[i];
+		if(i != inc.size() - 1){
+			print += ", ";
+		}
+	}
+	return print;
+}
+
 hangman& hangman::operator=(const hangman& h){
 	return *this;
 }

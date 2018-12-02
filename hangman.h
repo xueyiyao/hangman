@@ -30,6 +30,8 @@ public:
 	std::string printWord() const;
 	//prints found to cout (will print '_' for unguessed values)
 	std::string printFound() const;
+	//prints the incorrectly guessed letters so far
+	std::string printInc() const;
 
 	//overloaded copy assignment operator
 	hangman& operator=(const hangman& h);
