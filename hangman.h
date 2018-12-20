@@ -5,7 +5,6 @@
 #include <string>
 #include <cstring>
 #include <vector>
-
 class hangman {
 public:
 
@@ -19,7 +18,7 @@ public:
 	//reads word into char array 'word'
 	void readWord(const char* const w);
 	//takes user's guess and updates inc and found
-	bool guess(const char c);
+	bool guess(const char c) noexcept(false);
 	//prints a string of the incorrectly guessed letters so far
 	std::string incSoFar() const;
 	//displays how many "lives" are remaining

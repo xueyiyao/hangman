@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
+#include <cctype>
 
 //default constructor
 hangman::hangman(){
@@ -23,8 +24,8 @@ hangman::hangman(const hangman& h){
 
 //destructor
 hangman::~hangman(){
-	delete [] this->word;
-	delete [] this->found;
+	delete[] this->word;
+	delete[] this->found;
 	this->inc.clear();
 	//STUB
 }
@@ -37,7 +38,10 @@ void hangman::readWord(const char* const w){
 	this->word = new char[strlen(w)];
 	this->found = new char[strlen(w)];
 	wordLength = strlen(w);
-	strcpy(this->word, w);
+	//strcpy(this->word, w);
+	for(int i = 0; i < this->wordLength; i++){
+		word[i] = w[i];
+	}
 
 	//initializes found with '_' characters
 	for(size_t i = 0; i < this->wordLength; i++){
@@ -48,22 +52,29 @@ void hangman::readWord(const char* const w){
 }
 
 //
-bool hangman::guess(const char c){
+bool hangman::guess(const char c) noexcept(false) {
 	//MAKE SURE TO CHECK FOR VALID INPUTS
-	bool foundLetter;
+	if(isalpha(c) == 0){
+		throw c;
+	}
+
+	//CONVERTS ALL LETTER TO LOWERCASE
+	char lowerc = tolower(c);
+
+	bool foundLetter = false;
 	int numfound = 0;
 	for(size_t i = 0; i < this->wordLength; i++){
-		if(c == this->word[i]){
-			this->found[i] = c;
+		if(lowerc == this->word[i]){
+			this->found[i] = lowerc;
 			foundLetter = true;
 			numfound++;
 		}
 	}
 
 	if(!foundLetter){
-		inc.push_back(c);
+		inc.push_back(lowerc);
 		livesLeft--;
-		std::cout << "Letter not found: " << c << std::endl;
+		std::cout << "Letter not found: " << lowerc << std::endl;
 		return false;
 	}
 

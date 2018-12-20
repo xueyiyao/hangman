@@ -42,13 +42,17 @@ int main(){
 			cout << "Guess a letter." << endl;
 			cin >> letter;
 
-			h1.guess(letter);
-			cout << h1.printFound() << '\t' << '\t';
-			cout << "Incorrect guesses so far: " << h1.printInc() << endl;
-			cout << "Number of lives left: " << h1.displayLives() << endl;
+			try{
+				h1.guess(letter);
+				cout << h1.printFound() << '\t' << '\t';
+				cout << "Incorrect guesses so far: " << h1.printInc() << endl;
+				cout << "Number of lives left: " << h1.displayLives() << endl;
 
-			cout << "----------------------------------------";
-			cout << "----------------------------------------" << endl;
+				cout << "----------------------------------------";
+				cout << "----------------------------------------" << endl;
+			} catch (char e) {
+				cout << "Entered an invalid character: " << e << endl;
+			}
 		}
 
 		if(h1.displayLives() != 0){
