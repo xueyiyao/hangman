@@ -19,8 +19,6 @@ public:
 	void readWord(const char* const w);
 	//takes user's guess and updates inc and found
 	bool guess(const char c) noexcept(false);
-	//prints a string of the incorrectly guessed letters so far
-	std::string incSoFar() const;
 	//displays how many "lives" are remaining
 	int displayLives() const;
 	//returns if game has been completed

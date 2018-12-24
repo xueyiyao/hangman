@@ -31,21 +31,52 @@ hangman::~hangman(){
 }
 
 void hangman::readWord(const char* const w){
+	//reading an empty string
+	if (strlen(w) == 0) {
+		return;
+	}
 	if (this->word) {
 		delete this->word;
+		if(this->found){
+			delete this->found;
+		}
 	}
 
-	this->word = new char[strlen(w)];
-	this->found = new char[strlen(w)];
-	wordLength = strlen(w);
-	//strcpy(this->word, w);
-	for(int i = 0; i < this->wordLength; i++){
-		word[i] = w[i];
+	std::string temp = "";
+	for(int i = 0; i < strlen(w); i++){
+		if(isalpha(w[i])){
+			temp += tolower(w[i]);
+		}
+		else if((w[i] == '\'' || w[i] == '-')){
+			temp += w[i];
+		}
 	}
+
+	this->word = new char[temp.length()];
+	this->found = new char[temp.length()];
+	strcpy(this->word, temp.c_str());
+	// for(int i = 0; i < strlen(w); i++){
+	// 	if(isalpha(w[i])){
+	// 		word[i] = tolower(w[i]);
+	// 	}
+	// 	else if(w[i] == '\'' || w[i] == '-'){
+	// 		word[i] = w[i];
+	// 	}
+	// }
+
+	wordLength = temp.length();
 
 	//initializes found with '_' characters
 	for(size_t i = 0; i < this->wordLength; i++){
-		this->found[i] = '_';
+		if(word[i] == '\''){
+			this->found[i] = '\'';
+		}
+		else if(word[i] == '-'){
+			this->found[i] = '-';
+		}
+		else {
+			this->found[i] = '_';
+		}
 	}
 
 	return;
@@ -82,10 +113,6 @@ bool hangman::guess(const char c) noexcept(false) {
 	return true;
 }
 
-std::string hangman::incSoFar() const {
-	return "STUB";
-}
-
 int hangman::displayLives() const {
 	return this->livesLeft;
 }
@@ -111,7 +138,9 @@ std::string hangman::printFound() const{
 	std::string print = "";
 	for(size_t i = 0; i < this->wordLength; i++){
 		print += this->found[i];
-		print += ' ';
+		if(i != this->wordLength - 1){		
+			print += ' ';
+		}
 	}
 	return print;
 }
